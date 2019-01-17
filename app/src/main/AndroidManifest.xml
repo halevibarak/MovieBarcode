@@ -4,7 +4,7 @@
     package="movies.com.dbqr">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name="movies.com.AppController"
@@ -30,6 +30,8 @@
         <activity
             android:name="movies.com.ui.DecoderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
     </application>
 
 </manifest>

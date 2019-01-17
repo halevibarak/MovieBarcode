@@ -24,8 +24,8 @@ import movies.com.MovieAdapter
 import movies.com.dbqr.R
 import movies.com.model.DatabaseHandler
 import movies.com.model.Movie
-import movies.com.ui.DecoderActivity.FROM_BARCODE
-import movies.com.ui.DescriptionActivity.KEY_MOVIE
+import movies.com.ui.DecoderActivity.Companion.FROM_BARCODE
+import movies.com.ui.DescriptionActivity.Companion.KEY_MOVIE
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -50,7 +50,10 @@ class MovieListFragment : Fragment(), ActionInterface {
         mRecyclerView!!.itemAnimator = DefaultItemAnimator()
         mRecyclerView!!.setHasFixedSize(true)
         mMovieList = arguments!!.getParcelableArrayList(ARG_LIST)
-        mMovieAdapter = MovieAdapter(mMovieList, this)
+        if (mMovieList==null) {
+            return root
+        }
+        mMovieAdapter = MovieAdapter(mMovieList as ArrayList<Movie>, this)
         mRecyclerView!!.adapter = mMovieAdapter
 
         val fab = root.findViewById<FloatingActionButton>(R.id.fab)
@@ -81,6 +84,7 @@ class MovieListFragment : Fragment(), ActionInterface {
         b.putParcelable(KEY_MOVIE, movie)
         descActivityIntent.putExtras(b)
         activity!!.startActivity(descActivityIntent)
+        activity!!.overridePendingTransition(R.anim.enter, R.anim.exit);
     }
 
     private fun showPermissionSnackbar() {
@@ -110,7 +114,7 @@ class MovieListFragment : Fragment(), ActionInterface {
                 val gson = Gson()
                 var jObject: JSONObject? = null
                 try {
-                    mRecyclerView.let {
+                    mRecyclerView?.let {
                         jObject = JSONObject(result)
                         val movie = gson.fromJson(jObject.toString(), Movie::class.java)
                         if (mMovieList!!.contains(movie)) {
@@ -126,9 +130,9 @@ class MovieListFragment : Fragment(), ActionInterface {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-                mMovieList.let {
+                mMovieList?.let {
                     mMovieList!!.sortDescending()
-                    mMovieAdapter!!.updateList(mMovieList)
+                    mMovieAdapter!!.notifyDataSetChanged()
                 }
 
             }
