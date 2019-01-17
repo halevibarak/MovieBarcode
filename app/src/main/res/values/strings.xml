@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Movie Barcode</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_decoder">DecoderActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="permission_text">דחית בעבר בקשה להרשאה אנא עבור למסך הגדרות של האפליקציה</string>
+</resources>
