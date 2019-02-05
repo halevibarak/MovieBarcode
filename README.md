@@ -1,7 +1,7 @@
 # MovieBarcode
 MVVM - LiveData - pass String to ViewModel
 
-RXJava 
+QR Barcode Reader
 
 volley network
 
